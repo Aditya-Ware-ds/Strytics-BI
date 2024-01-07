@@ -67,13 +67,16 @@ matcher.add("payment methods", [patterns_paymentmethods])
 matcher.add("Exited", [patterns_Exited])
 
 
-
 #prompt parsing
 doc = nlp("How do different payment methods impact online transaction completion rates")
 matches = matcher(doc)
-
+ip_labels = []
 for match_id, start, end in matches:
     span = doc[start:end]
-    label = doc.vocab.strings[match_id]
-    print({span.text}, label)
+    label = doc.vocab.strings[match_id]   
+    ip_labels.append(label)
+print(ip_labels)
+
+
+   
     
