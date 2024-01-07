@@ -23,6 +23,7 @@ pattern_marks = ["educational", "education"]
 pattern_shipping = ["shipping", "shippings"]
 pattern_customerid = ["repeat", "repeats"]
 pattern_paymentmethods = ["payment method","payment", "payments", "method", "methods", ]
+pattern_Exited = ["customer", "customers", "churn", "churning", "churns","Exited","Exit","Exits"]
 
 # Create patterns for each category
 patterns_categories = [{"LOWER": {"in": pattern_categories}}]
@@ -42,6 +43,7 @@ patterns_marks = [{"LOWER": {"in": pattern_marks}}]
 patterns_shipping = [{"LOWER": {"in": pattern_shipping}}]
 patterns_customerid = [{"LOWER": {"in": pattern_customerid}}]
 patterns_paymentmethods = [{"LOWER": {"in": pattern_paymentmethods}}]
+patterns_Exited  = [{"LOWER": {"in": pattern_Exited }}]
 
 
 #model training and adding to pipeline
@@ -62,6 +64,7 @@ matcher.add("marks", [patterns_marks])
 matcher.add("shipping", [patterns_shipping])
 matcher.add("customer ID", [patterns_customerid])
 matcher.add("payment methods", [patterns_paymentmethods])
+matcher.add("Exited", [patterns_Exited])
 
 
 
