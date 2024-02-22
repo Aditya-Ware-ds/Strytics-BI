@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strytics</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+           
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333; 
+            display: flex;
+            flex-direction: column;
+            height: 98vh;
+            width: 1537px;
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #DFDFDF; 
+            color: #fff; 
+            
+            text-align: center;
+        }
+
+        main {
+            flex: 1;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        footer {
+            
+            color: #fff; 
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        
+        #userInput {
+            flex: 1; 
+            padding: 10px;
+            border: none;
+            border-radius: 15px;
+            margin-right: 10px;
+            font-size: 16px;
+            border: #232323 1px solid;
+            width: 1000px;
+            margin-left: 20px;
+        }
+
+        
+        #sendButton {
+            background-color: #d9d9d9; 
+            color: black;
+            padding: 12px 20px; 
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #uploadButton {
+            background-color: #d9d9d9;
+            color: black;
+            padding: 12px 17px;
+            border: none;
+            border-radius: 30px;
+            margin-left: 5px;
+            margin-right: 10px;
+            font-size: large;
+            
+        }
+
+        #sendButton:hover {
+            background-color: #888888;
+        }
+        #uploadButton:hover {
+            background-color: #888888 ;
+        }
+
+        #hamburgerIcon {
+           position: absolute;
+           top: 15px;
+           left: 15px;
+       }
+        
+        
+        
+        .message {
+            background-color: #ddd; 
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            max-width: 70%;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #b2d8d8; 
+        }
+
+        #menuToggle
+ {
+   display: block;
+   position: relative;
+   top: 50px;
+   left: 50px;
+   
+   z-index: 1;
+   
+   -webkit-user-select: none;
+   user-select: none;
+ }
+ 
+ #menuToggle a
+ {
+   text-decoration: none;
+   color: #232323;
+   
+   transition: color 0.3s ease;
+ }
+ 
+ #menuToggle a:hover
+ {
+   color: tomato;
+ }
+ 
+ 
+ #menuToggle input
+ {
+   display: block;
+   width: 40px;
+   height: 32px;
+   position: absolute;
+   top: -7px;
+   left: -5px;
+   
+   cursor: pointer;
+   
+   opacity: 0; 
+   z-index: 2; 
+   
+   -webkit-touch-callout: none;
+ }
+ 
+ 
+ #menuToggle span
+ {
+   display: block;
+   width: 33px;
+   height: 4px;
+   margin-bottom: 5px;
+   position: relative;
+   
+   background: black;
+   border-radius: 3px;
+   
+   z-index: 1;
+   
+   transform-origin: 4px 0px;
+   
+   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+               background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+               opacity 0.55s ease;
+ }
+ 
+ #menuToggle span:first-child
+ {
+   transform-origin: 0% 0%;
+ }
+ 
+ #menuToggle span:nth-last-child(2)
+ {
+   transform-origin: 0% 100%;
+ }
+ 
+
+ #menuToggle input:checked ~ span
+ {
+   opacity: 1;
+   transform: rotate(45deg) translate(-2px, -1px);
+   background: #232323;
+ }
+ 
+ 
+ #menuToggle input:checked ~ span:nth-last-child(3)
+ {
+   opacity: 0;
+   transform: rotate(0deg) scale(0.2, 0.2);
+ }
+ 
+ 
+ #menuToggle input:checked ~ span:nth-last-child(2)
+ {
+   transform: rotate(-45deg) translate(0, -1px);
+ }
+ 
+
+ #menu
+ {
+   position: absolute;
+   width: 300px;
+   margin: -100px 0 0 -50px;
+   padding: 50px;
+   padding-top: 125px;
+   height: 560px;
+   
+   background: #ededed;
+   list-style-type: none;
+   -webkit-font-smoothing: antialiased;
+   
+   
+   transform-origin: 0% 0%;
+   transform: translate(-100%, 0);
+   
+   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+ }
+ 
+ #menu li
+ {
+   padding: 10px 0;
+   font-size: 22px;
+ }
+ 
+ 
+ #menuToggle input:checked ~ ul
+ {
+   transform: none;
+ }
+ #logo{
+  height: 115px;
+  margin-left: 1200px;
+ }
+ #chatContainer{
+  background-color: #f6f4f4;
+  margin-left: 200px;
+  margin-top: 10px;
+  width: 1090px;
+  border-radius: 30px;
+  overflow-y: scroll;
+ }
+ footer{
+  width: 1200px;
+  margin-left: 150px;
+ }
+ #menuToggle:checked{
+  color: black;
+ }
+    </style>
+</head>
+<body>
+    <nav role="navigation">
+        <div id="menuToggle">
+          <input  type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+          <ul id="menu">
+            <a href="#"><li>New Session</li></a>
+            <a href="#"><li>Contact</li></a>
+            
+          </ul>
+        </div>
+      </nav>
+
+    <header>
+        <img id="logo" src="https://pbs.twimg.com/media/GDj3alaXYAASYei?format=png&name=small">
+    </header>
+
+    <main id="chatContainer">       
+        
+    </main>
+
+    <footer>
+      <form id="formUpload" enctype="multipart/form-data" onsubmit="event.preventDefault(); openFileInput();">
+        <button type="submit" id="uploadButton">+</button>
+        <input type="file" id="fileInput" name="csvFile" style="display: none;" onchange="handleFileSelection()">
+    </form>
+    
+      
+      <form id="sendMessage" onsubmit="sendMessage(); return false;">
+        
+        <input type="text" id="userInput" placeholder="Type your message...">
+        <button id="sendButton" onclick="sendMessage()">Send</button>
+   
+
+      </form>
+      
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const chatContainer = document.getElementById('chatContainer');
+    const welcomeMessage = document.createElement('div');
+    welcomeMessage.classList.add('message');
+    welcomeMessage.textContent = 'Welcome! please enter your dataset first';
+    chatContainer.appendChild(welcomeMessage);
+});
+
+function sendMessage() {
+    const userInput = document.getElementById('userInput').value.trim();
+
+    if (userInput === '') {
+        return;
+    }
+
+    const chatContainer = document.getElementById('chatContainer');
+
+    const userMessage = document.createElement('div');
+    userMessage.classList.add('message', 'user-message');
+    userMessage.textContent = userInput;
+    chatContainer.appendChild(userMessage);
+
+    // Clear the input field after sending the message
+    document.getElementById('userInput').value = '';
+
+    // Make a POST request to the server
+    fetch('/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userInput }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the bot response as needed
+            const botResponse = data.botResponse;
+
+            const botMessage = document.createElement('div');
+            botMessage.classList.add('message');
+            botMessage.textContent = botResponse;
+            chatContainer.appendChild(botMessage);
+
+            // You can add further logic here if needed
+        })
+        .catch(error => {
+            console.error('Error sending message:', error);
+            // Handle the error as needed
+        });
+}
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-oU5tRz+rUHRRCd6Fqozi7eUp6JcA1tvphK7b8ZFi7AEL8qYDBFzDE5ps8YzhKp6P" crossorigin="anonymous"></script>
+
+<script>
+  function openFileInput() {
+      document.getElementById('fileInput').click();
+  }
+
+  function handleFileSelection() {
+      const fileInput = document.getElementById('fileInput');
+      const selectedFile = fileInput.files[0];
+
+      if (selectedFile) {
+          alert('File selected: ' + selectedFile.name);
+
+          // Make an asynchronous request to the server
+          fetch('/', {
+              method: 'POST',
+              body: new FormData(document.getElementById('formUpload')),
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle the response from the server if needed
+             //console.log(data);
+          })
+          .catch(error => {
+              console.error('Error submitting form:', error);
+          });
+      }
+  }
+</script>
+
+
+
+</body>
+</html>
